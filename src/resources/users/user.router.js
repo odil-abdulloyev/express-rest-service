@@ -11,8 +11,12 @@ router.route('/').get(async (req, res) => {
 router.route('/').post(async (req, res) => {
   const { name, login, password } = req.body;
   const user = new User({ name, login, password });
-  await usersService.addUser(user);
-  res.status(201).json(User.toResponse(user));
+  try {
+    await usersService.create(user);
+    res.status(201).json(User.toResponse(user));
+  } catch (error) {
+    res.status(400).send('Bad request');
+  }
 });
 
 router.route('/:id').get(async (req, res) => {
@@ -39,7 +43,7 @@ router.route('/:id').put(async (req, res) => {
 
 router.route('/:id').delete(async (req, res) => {
   const { id } = req.params;
-  const deleted = await usersService.deleteUser(id);
+  const deleted = await usersService.remove(id);
   await tasksService.unassignUser(id);
   if (deleted) {
     res.status(204).json(true);

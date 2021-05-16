@@ -11,8 +11,12 @@ router.route('/').get(async (req, res) => {
 router.route('/').post(async (req, res) => {
   const { title, columns } = req.body;
   const board = new Board({ title, columns });
-  await boardsService.addBoard(board);
-  res.status(201).json(board);
+  try {
+    await boardsService.create(board);
+    res.status(201).json(board);
+  } catch (error) {
+    res.status(400).send('Bad request');
+  }
 });
 
 router.route('/:id').get(async (req, res) => {
@@ -39,8 +43,8 @@ router.route('/:id').put(async (req, res) => {
 
 router.route('/:id').delete(async (req, res) => {
   const { id } = req.params;
-  const deleted = await boardsService.deleteBoard(id);
-  await tasksService.deleteFromBoard(id);
+  const deleted = await boardsService.remove(id);
+  await tasksService.removeBoardTasks(id);
   if (deleted) {
     res.status(204).json(true);
   } else {

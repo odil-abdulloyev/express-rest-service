@@ -2,7 +2,7 @@ const users = [];
 
 const getAll = async () => users;
 
-const addUser = async (user) => {
+const create = async (user) => {
   users.push(user);
 };
 
@@ -17,7 +17,7 @@ const update = async (newUser) => {
   return false;
 };
 
-const deleteUser = async (id) => {
+const remove = async (id) => {
   const idx = users.findIndex((user) => user.id === id);
   if (idx >= 0) {
     users.splice(idx, 1);
@@ -26,4 +26,4 @@ const deleteUser = async (id) => {
   return false;
 };
 
-module.exports = { getAll, addUser, getById, update, deleteUser };
+module.exports = { getAll, create, getById, update, remove };

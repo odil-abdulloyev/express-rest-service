@@ -2,7 +2,7 @@ const boards = [];
 
 const getAll = async () => boards;
 
-const addBoard = async (board) => {
+const create = async (board) => {
   boards.push(board);
 };
 
@@ -17,7 +17,7 @@ const update = async (newBoard) => {
   return false;
 };
 
-const deleteBoard = async (id) => {
+const remove = async (id) => {
   const idx = boards.findIndex((board) => board.id === id);
   if (idx >= 0) {
     boards.splice(idx, 1);
@@ -26,4 +26,4 @@ const deleteBoard = async (id) => {
   return false;
 };
 
-module.exports = { getAll, addBoard, getById, update, deleteBoard, boards };
+module.exports = { getAll, create, getById, update, remove, boards };

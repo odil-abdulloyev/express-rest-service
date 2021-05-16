@@ -3,7 +3,7 @@ const tasks = [];
 const getAll = async (boardId) =>
   tasks.filter((task) => task.boardId === boardId);
 
-const addTask = async (task) => {
+const create = async (task) => {
   tasks.push(task);
 };
 
@@ -18,7 +18,7 @@ const update = async (newTask) => {
   return false;
 };
 
-const deleteTask = async (id) => {
+const remove = async (id) => {
   const idx = tasks.findIndex((user) => user.id === id);
   if (idx >= 0) {
     tasks.splice(idx, 1);
@@ -27,7 +27,7 @@ const deleteTask = async (id) => {
   return false;
 };
 
-const deleteFromBoard = async (boardId) => {
+const removeBoardTasks = async (boardId) => {
   if (tasks.length > 0) {
     let i = tasks.length - 1;
     while (i >= 0) {
@@ -50,10 +50,10 @@ const unassignUser = async (userId) => {
 
 module.exports = {
   getAll,
-  addTask,
+  create,
   getById,
   update,
-  deleteTask,
-  deleteFromBoard,
+  remove,
+  removeBoardTasks,
   unassignUser,
 };

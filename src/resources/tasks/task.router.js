@@ -19,8 +19,12 @@ router.route('/').post(async (req, res) => {
     columnId,
     boardId,
   });
-  await tasksService.addTask(task);
-  res.status(201).json(task);
+  try {
+    await tasksService.create(task);
+    res.status(201).json(task);
+  } catch (error) {
+    res.status(400).send('Bad request');
+  }
 });
 
 router.route('/:id').get(async (req, res) => {
@@ -55,7 +59,7 @@ router.route('/:id').put(async (req, res) => {
 
 router.route('/:id').delete(async (req, res) => {
   const { id } = req.params;
-  const deleted = await tasksService.deleteTask(id);
+  const deleted = await tasksService.remove(id);
   if (deleted) {
     res.status(204).json(true);
   } else {
