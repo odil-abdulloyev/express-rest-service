@@ -26,4 +26,4 @@ const deleteBoard = async (id) => {
   return false;
 };
 
-module.exports = { getAll, addBoard, getById, update, deleteBoard };
+module.exports = { getAll, addBoard, getById, update, deleteBoard, boards };
