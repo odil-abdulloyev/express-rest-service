@@ -8,6 +8,7 @@ const { v4 } = require('uuid');
  */
 class Board {
   /**
+   * @constructor board constructor
    * @param {Object} paramsObject board params
    */
   constructor({ id = v4(), title = 'Board', columns = [] } = {}) {
