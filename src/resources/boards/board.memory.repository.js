@@ -1,3 +1,7 @@
+/**
+ * Boards storage
+ * @type {Array<Board>}
+ */
 const boards = [];
 
 /**

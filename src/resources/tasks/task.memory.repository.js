@@ -1,3 +1,7 @@
+/**
+ * Tasks storage
+ * @type {Array<Task>}
+ */
 const tasks = [];
 
 /**
