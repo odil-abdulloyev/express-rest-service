@@ -17,7 +17,7 @@ const create = async (board) => {
 
 /**
  * Get board by id
- * @param {number|string} id board id
+ * @param {string} id board id
  * @returns {Promise<Board|undefined>} board by id
  */
 const getById = async (id) => boards.find((board) => board.id === id);
@@ -38,7 +38,7 @@ const update = async (newBoard) => {
 
 /**
  * Remove board by id
- * @param {number|string} id board id
+ * @param {string} id board id
  * @returns {Promise<boolean>} true if removed, otherwise - false
  */
 const remove = async (id) => {
