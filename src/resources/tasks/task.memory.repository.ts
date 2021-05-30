@@ -1,39 +1,17 @@
-/**
- * Tasks storage
- * @type {Array<Task>}
- */
-const tasks = [];
+import Task from './task.model';
 
-/**
- * Get all tasks
- * @param {string} boardId board id
- * @returns {Promise<Array<Task>>} all tasks
- */
-const getAll = async (boardId) =>
+const tasks: Task[] = [];
+
+const getAll = async (boardId: string) =>
   tasks.filter((task) => task.boardId === boardId);
 
-/**
- * Create new task
- * @param {Task} task Task instance
- * @returns {Promise<void>} void
- */
-const create = async (task) => {
+const create = async (task: Task) => {
   tasks.push(task);
 };
 
-/**
- * Get task by id
- * @param {string} id task id
- * @returns {Promise<Task|undefined>} task by id
- */
-const getById = async (id) => tasks.find((task) => task.id === id);
+const getById = async (id: string) => tasks.find((task) => task.id === id);
 
-/**
- * Update task
- * @param {Task} newTask new task
- * @returns {Promise<boolean>} true if updated, otherwise - false
- */
-const update = async (newTask) => {
+const update = async (newTask: Task) => {
   const idx = tasks.findIndex((task) => task.id === newTask.id);
   if (idx >= 0) {
     tasks.splice(idx, 1, newTask);
@@ -42,12 +20,7 @@ const update = async (newTask) => {
   return false;
 };
 
-/**
- * Remove task by id
- * @param {string} id task id
- * @returns {Promise<boolean>} true if removed, otherwise - false
- */
-const remove = async (id) => {
+const remove = async (id: string) => {
   const idx = tasks.findIndex((user) => user.id === id);
   if (idx >= 0) {
     tasks.splice(idx, 1);
@@ -56,15 +29,11 @@ const remove = async (id) => {
   return false;
 };
 
-/**
- * Remove all tasks of board
- * @param {string} boardId board id
- */
-const removeBoardTasks = async (boardId) => {
+const removeBoardTasks = async (boardId: string) => {
   if (tasks.length > 0) {
     let i = tasks.length - 1;
     while (i >= 0) {
-      if (tasks[i].boardId === boardId) {
+      if (tasks[i]?.boardId === boardId) {
         tasks.splice(i, 1);
       }
       i -= 1;
@@ -72,15 +41,11 @@ const removeBoardTasks = async (boardId) => {
   }
 };
 
-/**
- * Unassign user
- * @param {string} userId user id
- */
-const unassignUser = async (userId) => {
+const unassignUser = async (userId: string) => {
   tasks.forEach((task) => {
     const currentTask = task;
     if (task.userId === userId) {
-      currentTask.userId = null;
+      currentTask.userId = '';
     }
   });
 };

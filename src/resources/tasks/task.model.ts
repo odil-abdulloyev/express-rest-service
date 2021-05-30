@@ -1,28 +1,28 @@
 import { v4 } from 'uuid';
 
-/**
- * @class Task
- * @property {string} id task id
- * @property {string} title task title
- * @property {number} order task order
- * @property {string} description task description
- * @property {string} userId user id
- * @property {string} boardId board id
- * @property {string} columnId column id
- */
 class Task {
-  /**
-   * @constructor task constructor
-   * @param {Object} paramsObject task params
-   */
+  id: string;
+
+  title: string;
+
+  order: number;
+
+  description: string;
+
+  userId: string;
+
+  boardId: string;
+
+  columnId: string;
+
   constructor({
                 id = v4(),
                 title = 'Task',
                 order = 0,
                 description = 'Task description',
-                userId = null,
-                boardId = null,
-                columnId = null
+                userId = '',
+                boardId = '',
+                columnId = ''
               } = {}) {
     this.id = id;
     this.title = title;

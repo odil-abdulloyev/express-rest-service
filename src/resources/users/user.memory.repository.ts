@@ -1,37 +1,16 @@
-/**
- * Users storage
- * @type {Array<User>}
- */
-const users = [];
+import User from './user.model';
 
-/**
- * Get all users
- * @returns {Promise<Array<User>>} all users
- */
+const users: User[] = [];
+
 const getAll = async () => users;
 
-/**
- * Create new user
- * @param {User} user User instance
- * @returns {Promise<void>} void
- */
-const create = async (user) => {
+const create = async (user: User) => {
   users.push(user);
 };
 
-/**
- * Get user by id
- * @param {string} id user id
- * @returns {Promise<User|undefined>} user by id
- */
-const getById = async (id) => users.find((user) => user.id === id);
+const getById = async (id: string) => users.find((user) => user.id === id);
 
-/**
- * Update board
- * @param {User} newUser new user
- * @returns {Promise<boolean>} true if updated, otherwise - false
- */
-const update = async (newUser) => {
+const update = async (newUser: User) => {
   const idx = users.findIndex((user) => user.id === newUser.id);
   if (idx >= 0) {
     users.splice(idx, 1, newUser);
@@ -40,12 +19,7 @@ const update = async (newUser) => {
   return false;
 };
 
-/**
- * Remove user by id
- * @param {string} id user id
- * @returns {Promise<boolean>} true if removed, otherwise - false
- */
-const remove = async (id) => {
+const remove = async (id: string) => {
   const idx = users.findIndex((user) => user.id === id);
   if (idx >= 0) {
     users.splice(idx, 1);

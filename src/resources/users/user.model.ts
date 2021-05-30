@@ -1,17 +1,14 @@
 import { v4 } from 'uuid';
 
-/**
- * @class User
- * @property {string} id user id
- * @property {string} name user name
- * @property {string} login user login
- * @property {string} password user password
- */
 class User {
-  /**
-   * @constructor user constructor
-   * @param {Object} paramsObject user params
-   */
+  id: string;
+
+  name: string;
+
+  login: string;
+
+  password: string;
+
   constructor({
     id = v4(),
     name = 'USER',
@@ -24,12 +21,7 @@ class User {
     this.password = password;
   }
 
-  /**
-   * Validate user
-   * @param {Object} user params object
-   * @returns {Object} user object
-   */
-  static toResponse(user) {
+  static toResponse(user: User) {
     const { id, name, login } = user;
     return { id, name, login };
   }
