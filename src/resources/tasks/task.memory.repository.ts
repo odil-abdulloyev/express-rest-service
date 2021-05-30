@@ -45,7 +45,7 @@ const unassignUser = async (userId: string) => {
   tasks.forEach((task) => {
     const currentTask = task;
     if (task.userId === userId) {
-      currentTask.userId = '';
+      currentTask.userId = null;
     }
   });
 };
