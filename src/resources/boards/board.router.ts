@@ -5,7 +5,7 @@ import * as tasksService from '../tasks/task.service';
 
 const router = Router();
 
-router.route('/').get(async (req, res) => {
+router.route('/').get(async (_req, res) => {
   const boards = await boardsService.getAll();
   res.status(200).json(boards);
 });
