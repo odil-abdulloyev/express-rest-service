@@ -1,4 +1,4 @@
-const usersRepo = require('./user.memory.repository');
+import * as usersRepo from './user.memory.repository';
 
 /**
  * Get all users
@@ -34,4 +34,4 @@ const update = async (newUser) => usersRepo.update(newUser);
  */
 const remove = async (id) => usersRepo.remove(id);
 
-module.exports = { getAll, create, getById, update, remove };
+export { getAll, create, getById, update, remove };

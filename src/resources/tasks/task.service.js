@@ -1,4 +1,4 @@
-const tasksRepo = require('./task.memory.repository');
+import * as tasksRepo from './task.memory.repository';
 
 /**
  * Get all tasks
@@ -47,7 +47,7 @@ const removeBoardTasks = async (boardId) => tasksRepo.removeBoardTasks(boardId);
  */
 const unassignUser = async (userId) => tasksRepo.unassignUser(userId);
 
-module.exports = {
+export {
   getAll,
   create,
   getById,

@@ -85,12 +85,12 @@ const unassignUser = async (userId) => {
   });
 };
 
-module.exports = {
+export {
   getAll,
   create,
   getById,
   update,
   remove,
   removeBoardTasks,
-  unassignUser,
+  unassignUser
 };

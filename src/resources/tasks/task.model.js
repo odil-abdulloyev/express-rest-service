@@ -1,4 +1,4 @@
-const { v4 } = require('uuid');
+import { v4 } from 'uuid';
 
 /**
  * @class Task
@@ -16,14 +16,14 @@ class Task {
    * @param {Object} paramsObject task params
    */
   constructor({
-    id = v4(),
-    title = 'Task',
-    order = 0,
-    description = 'Task description',
-    userId = null,
-    boardId = null,
-    columnId = null,
-  } = {}) {
+                id = v4(),
+                title = 'Task',
+                order = 0,
+                description = 'Task description',
+                userId = null,
+                boardId = null,
+                columnId = null
+              } = {}) {
     this.id = id;
     this.title = title;
     this.order = order;
@@ -34,4 +34,4 @@ class Task {
   }
 }
 
-module.exports = Task;
+export default Task;

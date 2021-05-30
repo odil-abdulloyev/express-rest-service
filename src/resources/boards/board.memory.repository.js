@@ -1,3 +1,4 @@
+
 /**
  * Boards storage
  * @type {Array<Board>}
@@ -54,4 +55,4 @@ const remove = async (id) => {
   return false;
 };
 
-module.exports = { getAll, create, getById, update, remove, boards };
+export { getAll, create, getById, update, remove };
