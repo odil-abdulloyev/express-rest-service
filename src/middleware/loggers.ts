@@ -1,6 +1,13 @@
 import path from 'path';
-import { createWriteStream, writeFileSync } from 'fs';
+import { createWriteStream, writeFileSync, existsSync, mkdirSync } from 'fs';
 import { Request, Response, NextFunction } from 'express';
+
+const createLogsDir = () => {
+  const dir = path.join(__dirname, '../../logs');
+  if (!existsSync(dir)) {
+    mkdirSync(dir);
+  }
+}
 
 const requestLogger = (req: Request, res: Response, next: NextFunction) => {
   const { url, query, body, method } = req;
@@ -12,6 +19,7 @@ Query parameters: ${JSON.stringify(query)}
 Request body: ${JSON.stringify(body)}
 Status code: ${res.statusCode}
 `;
+    createLogsDir();
     const ws = createWriteStream(path.join(__dirname, '../../logs/info.log'), { 'flags': 'a' });
     ws.write(chunk, (err) => {
       if (err) {
@@ -23,6 +31,7 @@ Status code: ${res.statusCode}
 };
 
 const errorLogger = (err: Error, _req: Request, res: Response, _next: NextFunction) => {
+  createLogsDir();
   const ws = createWriteStream(path.join(__dirname, '../../logs/errors.log'), { 'flags': 'a' });
   ws.write(`\n${err.stack}\n`, (error) => {
     if (error) {
@@ -33,10 +42,12 @@ const errorLogger = (err: Error, _req: Request, res: Response, _next: NextFuncti
 };
 
 const uncaughtExceptionLogger = (err: Error) => {
+  createLogsDir();
   writeFileSync(path.join(__dirname, '../../logs/uncaught-errors.log'), `\n${err.stack}\n`,{ 'flag': 'a' });
 };
 
 const unhandledRejectionLogger = (err: Error) => {
+  createLogsDir();
   writeFileSync(path.join(__dirname, '../../logs/unhandled-rejection-errors.log'), `\n${err.stack}\n`,{ 'flag': 'a' });
 }
 
