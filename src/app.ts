@@ -39,6 +39,9 @@ process.on('uncaughtException', (err: Error) => {
   process.exit(1);
 });
 
-process.on('unhandledRejection', uncaughtErrorHandler);
+process.on('unhandledRejection', (err: Error) => {
+  uncaughtErrorHandler(err);
+  process.exit(1);
+});
 
 export default app;
