@@ -1,15 +1,17 @@
-const tasks = [];
+import Task from './task.model';
 
-const getAll = async (boardId) =>
+const tasks: Task[] = [];
+
+const getAll = async (boardId: string) =>
   tasks.filter((task) => task.boardId === boardId);
 
-const create = async (task) => {
+const create = async (task: Task) => {
   tasks.push(task);
 };
 
-const getById = async (id) => tasks.find((task) => task.id === id);
+const getById = async (id: string) => tasks.find((task) => task.id === id);
 
-const update = async (newTask) => {
+const update = async (newTask: Task) => {
   const idx = tasks.findIndex((task) => task.id === newTask.id);
   if (idx >= 0) {
     tasks.splice(idx, 1, newTask);
@@ -18,7 +20,7 @@ const update = async (newTask) => {
   return false;
 };
 
-const remove = async (id) => {
+const remove = async (id: string) => {
   const idx = tasks.findIndex((user) => user.id === id);
   if (idx >= 0) {
     tasks.splice(idx, 1);
@@ -27,11 +29,11 @@ const remove = async (id) => {
   return false;
 };
 
-const removeBoardTasks = async (boardId) => {
+const removeBoardTasks = async (boardId: string) => {
   if (tasks.length > 0) {
     let i = tasks.length - 1;
     while (i >= 0) {
-      if (tasks[i].boardId === boardId) {
+      if (tasks[i]?.boardId === boardId) {
         tasks.splice(i, 1);
       }
       i -= 1;
@@ -39,7 +41,7 @@ const removeBoardTasks = async (boardId) => {
   }
 };
 
-const unassignUser = async (userId) => {
+const unassignUser = async (userId: string) => {
   tasks.forEach((task) => {
     const currentTask = task;
     if (task.userId === userId) {
@@ -48,12 +50,12 @@ const unassignUser = async (userId) => {
   });
 };
 
-module.exports = {
+export {
   getAll,
   create,
   getById,
   update,
   remove,
   removeBoardTasks,
-  unassignUser,
+  unassignUser
 };

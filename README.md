@@ -8,4 +8,8 @@
 4. Install dependencies: `npm i`;
 5. Run program: `npm start`;
 6. Run tests in new tab of terminal: `npm test`;
-7. Run linter: `npm run lint`.
+7. Run linter: `npm run lint`;
+8. Run ts-compiler: `npm run build`.
+
+## System requirements
+NodeJs v14 or newer

@@ -1,14 +1,18 @@
-const router = require('express').Router({ mergeParams: true });
-const Task = require('./task.model');
-const tasksService = require('./task.service');
+import { Router, Request, Response } from 'express';
+import Task from './task.model';
+import * as tasksService from './task.service';
 
-router.route('/').get(async (req, res) => {
+const router = Router({ mergeParams: true });
+
+router.route('/').get(async (req: Request, res: Response) => {
   const { boardId } = req.params;
-  const tasks = await tasksService.getAll(boardId);
-  res.status(200).json(tasks);
+  if (boardId) {
+    const tasks = await tasksService.getAll(boardId);
+    res.status(200).json(tasks);
+  }
 });
 
-router.route('/').post(async (req, res) => {
+router.route('/').post(async (req: Request, res: Response) => {
   const { boardId } = req.params;
   const { title, order, description, userId, columnId } = req.body;
   const task = new Task({
@@ -27,9 +31,9 @@ router.route('/').post(async (req, res) => {
   }
 });
 
-router.route('/:id').get(async (req, res) => {
+router.route('/:id').get(async (req: Request, res: Response) => {
   const { id } = req.params;
-  const task = await tasksService.getById(id);
+  const task = await tasksService.getById(String(id));
   if (task) {
     res.status(200).json(task);
   } else {
@@ -37,7 +41,7 @@ router.route('/:id').get(async (req, res) => {
   }
 });
 
-router.route('/:id').put(async (req, res) => {
+router.route('/:id').put(async (req: Request, res: Response) => {
   const { id } = req.params;
   const { title, order, description, userId, boardId, columnId } = req.body;
   const newTask = new Task({
@@ -57,9 +61,9 @@ router.route('/:id').put(async (req, res) => {
   }
 });
 
-router.route('/:id').delete(async (req, res) => {
+router.route('/:id').delete(async (req: Request, res: Response) => {
   const { id } = req.params;
-  const deleted = await tasksService.remove(id);
+  const deleted = await tasksService.remove(String(id));
   if (deleted) {
     res.status(204).json(true);
   } else {
@@ -67,4 +71,4 @@ router.route('/:id').delete(async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

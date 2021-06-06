@@ -3,3 +3,9 @@ node_modules
 .vscode
 
 .prettierrc
+
+docs
+
+.idea
+
+build
