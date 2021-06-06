@@ -1,13 +1,8 @@
-import { existsSync, mkdirSync, writeFileSync } from 'fs';
-import path from 'path';
 import createErrorData from '../utils/create-error-data';
+import logToFile from '../utils/log-to-file';
 
 const uncaughtErrorHandler = (err: Error): void => {
-  const dir = path.join(__dirname, '../../logs');
-  if (!existsSync(dir)) {
-    mkdirSync(dir);
-  }
-  writeFileSync(path.join(__dirname, '../../logs/errors.log'), createErrorData(err), { 'flag': 'a' });
+  logToFile('errors.log', createErrorData(err), true);
 };
 
 export default uncaughtErrorHandler;
