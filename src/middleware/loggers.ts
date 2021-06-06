@@ -1,5 +1,5 @@
 import path from 'path';
-import { createWriteStream } from 'fs';
+import { createWriteStream, writeFileSync } from 'fs';
 import { Request, Response, NextFunction } from 'express';
 
 const requestLogger = (req: Request, res: Response, next: NextFunction) => {
@@ -32,4 +32,12 @@ const errorLogger = (err: Error, _req: Request, res: Response, _next: NextFuncti
   return res.status(500).send('Internal Server Error');
 };
 
-export { requestLogger, errorLogger };
+const uncaughtExceptionLogger = (err: Error) => {
+  writeFileSync(path.join(__dirname, '../../logs/uncaught-errors.log'), `\n${err.stack}\n`,{ 'flag': 'a' });
+};
+
+const unhandledRejectionLogger = (err: Error) => {
+  writeFileSync(path.join(__dirname, '../../logs/unhandled-rejection-errors.log'), `\n${err.stack}\n`,{ 'flag': 'a' });
+}
+
+export { requestLogger, errorLogger, uncaughtExceptionLogger, unhandledRejectionLogger };
