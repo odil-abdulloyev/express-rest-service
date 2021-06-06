@@ -2,14 +2,14 @@ import path from 'path';
 import { createWriteStream, writeFileSync, existsSync, mkdirSync } from 'fs';
 import { Request, Response, NextFunction } from 'express';
 
-const createLogsDir = () => {
+const createLogsDir = (): void => {
   const dir = path.join(__dirname, '../../logs');
   if (!existsSync(dir)) {
     mkdirSync(dir);
   }
 }
 
-const requestLogger = (req: Request, res: Response, next: NextFunction) => {
+const requestLogger = (req: Request, res: Response, next: NextFunction): void => {
   const { url, query, body, method } = req;
   res.on('finish', () => {
     const chunk = `
@@ -30,7 +30,7 @@ Status code: ${res.statusCode}
   next();
 };
 
-const errorLogger = (err: Error, _req: Request, res: Response, _next: NextFunction) => {
+const errorLogger = (err: Error, _req: Request, res: Response, _next: NextFunction): Response => {
   createLogsDir();
   const ws = createWriteStream(path.join(__dirname, '../../logs/errors.log'), { 'flags': 'a' });
   ws.write(`\n${err.stack}\n`, (error) => {
@@ -41,12 +41,12 @@ const errorLogger = (err: Error, _req: Request, res: Response, _next: NextFuncti
   return res.status(500).send('Internal Server Error');
 };
 
-const uncaughtExceptionLogger = (err: Error) => {
+const uncaughtExceptionLogger = (err: Error): void => {
   createLogsDir();
   writeFileSync(path.join(__dirname, '../../logs/uncaught-errors.log'), `\n${err.stack}\n`,{ 'flag': 'a' });
 };
 
-const unhandledRejectionLogger = (err: Error) => {
+const unhandledRejectionLogger = (err: Error): void => {
   createLogsDir();
   writeFileSync(path.join(__dirname, '../../logs/unhandled-rejection-errors.log'), `\n${err.stack}\n`,{ 'flag': 'a' });
 }
