@@ -9,10 +9,10 @@ services:
     environment:
       - PORT=${PORT}
     volumes:
-    - ./:/usr/app/
+      - .:/usr/app
     networks:
       - custom-network
-    restart: always
+    restart: on-failure
   postgres:
     build: ./database
     ports:
@@ -25,7 +25,7 @@ services:
       - ./pgdata:/var/lib/postgresql/data
     networks:
       - custom-network
-    restart: always
+    restart: on-failure
 networks:
   custom-network:
     driver: bridge
