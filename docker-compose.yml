@@ -1,6 +1,7 @@
 version: '3'
 services:
   express:
+    image: odil/express-rest-service_express
     build: .
     ports:
       - ${PORT}:${PORT}
@@ -14,6 +15,7 @@ services:
       - custom-network
     restart: on-failure
   postgres:
+    image: odil/express-rest-service_postgres
     build: ./database
     ports:
       - ${POSTGRES_PORT}:${POSTGRES_PORT}
