@@ -1,19 +1,19 @@
 import * as tasksRepo from './task.memory.repository';
 import Task from './task.model';
 
-const getAll = async (boardId: string) => tasksRepo.getAll(boardId);
+const getAll = async (boardId: string): Promise<Task[]> => tasksRepo.getAll(boardId);
 
-const create = async (task: Task) => tasksRepo.create(task);
+const create = async (task: Task): Promise<void> => tasksRepo.create(task);
 
-const getById = async (id: string) => tasksRepo.getById(id);
+const getById = async (id: string): Promise<Task | undefined> => tasksRepo.getById(id);
 
-const update = async (newTask: Task) => tasksRepo.update(newTask);
+const update = async (newTask: Task): Promise<boolean> => tasksRepo.update(newTask);
 
-const remove = async (id: string) => tasksRepo.remove(id);
+const remove = async (id: string): Promise<boolean> => tasksRepo.remove(id);
 
-const removeBoardTasks = async (boardId: string) => tasksRepo.removeBoardTasks(boardId);
+const removeBoardTasks = async (boardId: string): Promise<void> => tasksRepo.removeBoardTasks(boardId);
 
-const unassignUser = async (userId: string) => tasksRepo.unassignUser(userId);
+const unassignUser = async (userId: string): Promise<void> => tasksRepo.unassignUser(userId);
 
 export {
   getAll,

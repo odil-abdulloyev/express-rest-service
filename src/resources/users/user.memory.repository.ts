@@ -2,15 +2,15 @@ import User from './user.model';
 
 const users: User[] = [];
 
-const getAll = async () => users;
+const getAll = async (): Promise<User[]> => users;
 
-const create = async (user: User) => {
+const create = async (user: User): Promise<void> => {
   users.push(user);
 };
 
-const getById = async (id: string) => users.find((user) => user.id === id);
+const getById = async (id: string): Promise<User | undefined> => users.find((user) => user.id === id);
 
-const update = async (newUser: User) => {
+const update = async (newUser: User): Promise<boolean> => {
   const idx = users.findIndex((user) => user.id === newUser.id);
   if (idx >= 0) {
     users.splice(idx, 1, newUser);
@@ -19,7 +19,7 @@ const update = async (newUser: User) => {
   return false;
 };
 
-const remove = async (id: string) => {
+const remove = async (id: string): Promise<boolean> => {
   const idx = users.findIndex((user) => user.id === id);
   if (idx >= 0) {
     users.splice(idx, 1);

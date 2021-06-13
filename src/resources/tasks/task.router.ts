@@ -1,18 +1,22 @@
-import { Router, Request, Response } from 'express';
+import { Router, Request, Response, NextFunction } from 'express';
 import Task from './task.model';
 import * as tasksService from './task.service';
 
 const router = Router({ mergeParams: true });
 
-router.route('/').get(async (req: Request, res: Response) => {
+router.route('/').get(async (req: Request, res: Response, next: NextFunction) => {
   const { boardId } = req.params;
   if (boardId) {
-    const tasks = await tasksService.getAll(boardId);
-    res.status(200).json(tasks);
+    try {
+      const tasks = await tasksService.getAll(boardId);
+      res.status(200).json(tasks);
+    } catch (error) {
+      next(error);
+    }
   }
 });
 
-router.route('/').post(async (req: Request, res: Response) => {
+router.route('/').post(async (req: Request, res: Response, next: NextFunction) => {
   const { boardId } = req.params;
   const { title, order, description, userId, columnId } = req.body;
   const task = new Task({
@@ -21,27 +25,31 @@ router.route('/').post(async (req: Request, res: Response) => {
     description,
     userId,
     columnId,
-    boardId,
+    boardId
   });
   try {
     await tasksService.create(task);
     res.status(201).json(task);
   } catch (error) {
-    res.status(400).send('Bad request');
+    next(error);
   }
 });
 
-router.route('/:id').get(async (req: Request, res: Response) => {
+router.route('/:id').get(async (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;
-  const task = await tasksService.getById(String(id));
-  if (task) {
-    res.status(200).json(task);
-  } else {
-    res.status(404).json({});
+  try {
+    const task = await tasksService.getById(String(id));
+    if (task) {
+      res.status(200).json(task);
+    } else {
+      res.status(404).json({});
+    }
+  } catch (error) {
+    next(error);
   }
 });
 
-router.route('/:id').put(async (req: Request, res: Response) => {
+router.route('/:id').put(async (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;
   const { title, order, description, userId, boardId, columnId } = req.body;
   const newTask = new Task({
@@ -51,23 +59,31 @@ router.route('/:id').put(async (req: Request, res: Response) => {
     description,
     userId,
     boardId,
-    columnId,
+    columnId
   });
-  const updated = await tasksService.update(newTask);
-  if (updated) {
-    res.status(200).json(newTask);
-  } else {
-    res.status(400).json({});
+  try {
+    const updated = await tasksService.update(newTask);
+    if (updated) {
+      res.status(200).json(newTask);
+    } else {
+      res.status(400).json({});
+    }
+  } catch (error) {
+    next(error);
   }
 });
 
-router.route('/:id').delete(async (req: Request, res: Response) => {
+router.route('/:id').delete(async (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;
-  const deleted = await tasksService.remove(String(id));
-  if (deleted) {
-    res.status(204).json(true);
-  } else {
-    res.status(404).json(false);
+  try {
+    const deleted = await tasksService.remove(String(id));
+    if (deleted) {
+      res.status(204).json(true);
+    } else {
+      res.status(404).json(false);
+    }
+  } catch (error) {
+    next(error);
   }
 });
 
