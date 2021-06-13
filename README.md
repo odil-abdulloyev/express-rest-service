@@ -13,3 +13,15 @@
 
 ## System requirements
 NodeJs v14 or newer
+
+## Docker instructions
+
+* Run containers: `docker-compose up`
+* Show images: `docker images`
+* Show running containers: `docker ps`
+* Show all containers: `docker ps -a`
+* Show networks: `docker network ls`
+* Scan image: `docker scan <image_name>`
+* Remove image: `docker rmi <image_id>`
+* Remove unused images, container and networks: `docker system prune`
+* Stop and remove containers: `docker-compose down`
