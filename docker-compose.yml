@@ -2,7 +2,9 @@ version: '3'
 services:
   express:
     image: odil/express-rest-service_express
-    build: .
+    build:
+      context: .
+      dockerfile: express.Dockerfile
     ports:
       - ${PORT}:${PORT}
     depends_on:
@@ -17,7 +19,9 @@ services:
     restart: on-failure
   postgres:
     image: odil/express-rest-service_postgres
-    build: ./database
+    build:
+      context: .
+      dockerfile: postgres.Dockerfile
     ports:
       - ${POSTGRES_PORT}:${POSTGRES_PORT}
     environment:
@@ -25,7 +29,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
     volumes:
-      - ./database/pgdata:/var/lib/postgresql/data
+      - ./pgdata:/var/lib/postgresql/data
     networks:
       - custom-network
     restart: on-failure
