@@ -1,7 +1,7 @@
-node_modules
-.vscode
-.prettierrc
-docs
-.idea
-build
-logs
+node_modules/
+.vscode/
+docs/
+.idea/
+build/
+logs/
+pgdata/
