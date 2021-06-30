@@ -1,7 +1,6 @@
-// import { v4 } from 'uuid';
 import { Entity, BaseEntity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+@Entity('users')
 class User extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id!: string;
@@ -9,10 +8,10 @@ class User extends BaseEntity {
   @Column()
   name!: string;
 
-  @Column()
+  @Column({nullable: true})
   login!: string;
 
-  @Column()
+  @Column({nullable: true})
   password!: string;
 
   // constructor({

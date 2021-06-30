@@ -1,8 +1,7 @@
-// import { v4 } from 'uuid';
 import { Entity, BaseEntity, Column, PrimaryGeneratedColumn } from 'typeorm';
 import BoardColumn from './board-column';
 
-@Entity()
+@Entity('boards')
 class Board extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id!: string;

@@ -1,13 +1,14 @@
 import * as boardsRepo from './board.memory.repository';
-import Board from './board.model';
+import IBoard from '../../types/iboard';
+import Board from '../../entity/board';
 
 const getAll = async (): Promise<Board[]> => boardsRepo.getAll();
 
-const create = async (board: Board): Promise<void> => boardsRepo.create(board);
+const create = async (board: IBoard): Promise<Board> => boardsRepo.create(board);
 
 const getById = async (id: string): Promise<Board | undefined> => boardsRepo.getById(id);
 
-const update = async (newBoard: Board): Promise<boolean> => boardsRepo.update(newBoard);
+const update = async (newBoard: IBoard): Promise<boolean> => boardsRepo.update(newBoard);
 
 const remove = async (id: string): Promise<boolean> => boardsRepo.remove(id);
 

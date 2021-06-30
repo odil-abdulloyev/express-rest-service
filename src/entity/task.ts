@@ -1,7 +1,6 @@
-// import { v4 } from 'uuid';
 import { Entity, BaseEntity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+@Entity('tasks')
 class Task extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id!: string;
@@ -15,7 +14,7 @@ class Task extends BaseEntity {
   @Column()
   description!: string;
 
-  @Column()
+  @Column('varchar',{nullable: true})
   userId!: string | null;
 
   @Column()
