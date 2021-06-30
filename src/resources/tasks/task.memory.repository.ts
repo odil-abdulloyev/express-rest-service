@@ -1,29 +1,44 @@
 import Task from './task.model';
+import TaskEntity from '../../entity/task';
+import ITask from '../../types/itask';
 
 const tasks: Task[] = [];
 
-const getAll = async (boardId: string): Promise<Task[]> =>
-  tasks.filter((task) => task.boardId === boardId);
+const getAll = async (boardId: string): Promise<TaskEntity[]> => TaskEntity.find({boardId});
 
-const create = async (task: Task): Promise<void> => {
-  tasks.push(task);
+const create = async ({title, order, description, userId, boardId, columnId}: ITask): Promise<TaskEntity> => {
+  const task = new TaskEntity();
+  task.title = title;
+  task.order = order;
+  task.description = description;
+  task.userId = userId;
+  task.boardId = boardId;
+  task.columnId = columnId;
+  await task.save();
+  return task;
 };
 
-const getById = async (id: string): Promise<Task | undefined> => tasks.find((task) => task.id === id);
+const getById = async (id: string): Promise<TaskEntity | undefined> => TaskEntity.findOne(id);
 
-const update = async (newTask: Task): Promise<boolean> => {
-  const idx = tasks.findIndex((task) => task.id === newTask.id);
-  if (idx >= 0) {
-    tasks.splice(idx, 1, newTask);
+const update = async (newTask: ITask): Promise<boolean> => {
+  const task = await TaskEntity.findOne(newTask.id);
+  if (task) {
+    task.title = newTask.title;
+    task.order = newTask.order;
+    task.description = newTask.description;
+    task.boardId = newTask.boardId;
+    task.userId = newTask.userId;
+    task.columnId = newTask.columnId;
+    await task.save();
     return true;
   }
   return false;
 };
 
 const remove = async (id: string): Promise<boolean> => {
-  const idx = tasks.findIndex((user) => user.id === id);
-  if (idx >= 0) {
-    tasks.splice(idx, 1);
+  const task = await TaskEntity.findOne(id);
+  if (task) {
+    await task.remove();
     return true;
   }
   return false;

@@ -1,7 +1,8 @@
 import { Entity, BaseEntity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import ITask from '../types/itask';
 
 @Entity('tasks')
-class Task extends BaseEntity {
+class Task extends BaseEntity implements ITask {
   @PrimaryGeneratedColumn('uuid')
   id!: string;
 
