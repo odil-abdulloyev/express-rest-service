@@ -1,7 +1,7 @@
 import { Router, Request, Response, NextFunction } from 'express';
-import User from './user.model';
 import * as usersService from './user.service';
 import * as tasksService from '../tasks/task.service';
+import User from '../../entity/user';
 
 const router = Router();
 
@@ -16,9 +16,8 @@ router.route('/').get(async (_req: Request, res: Response, next: NextFunction) =
 
 router.route('/').post(async (req: Request, res: Response, next: NextFunction) => {
   const { name, login, password } = req.body;
-  const user = new User({ name, login, password });
   try {
-    await usersService.create(user);
+    const user = await usersService.create({ name, login, password } as User);
     res.status(201).json(User.toResponse(user));
   } catch (error) {
     next(error);
@@ -27,46 +26,43 @@ router.route('/').post(async (req: Request, res: Response, next: NextFunction) =
 
 router.route('/:id').get(async (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;
-  try {
-    const user = await usersService.getById(String(id));
-    if (user) {
-      res.status(200).json(User.toResponse(user));
-    } else {
-      res.status(404).json({});
+  if (id) {
+    try {
+      const user = await usersService.getById(id);
+      if (user) {
+        res.status(200).json(User.toResponse(user));
+      } else {
+        res.status(404).json({message: 'User not found'});
+      }
+    } catch (error) {
+      next(error);
     }
-  } catch (error) {
-    next(error);
   }
 });
 
 router.route('/:id').put(async (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;
   const { name, login, password } = req.body;
-  const newUser = new User({ id, name, login, password });
-  try {
-    const updated = await usersService.update(newUser);
-    if (updated) {
-      res.status(200).json(User.toResponse(newUser));
-    } else {
-      res.status(400).json({});
+  if (id) {
+    try {
+      const updated = await usersService.update({ id, name, login, password });
+      res.status(200).json({updated});
+    } catch (error) {
+      next(error);
     }
-  } catch (error) {
-    next(error);
   }
 });
 
 router.route('/:id').delete(async (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;
-  const deleted = await usersService.remove(String(id));
-  try {
-    await tasksService.unassignUser(String(id));
-    if (deleted) {
-      res.status(204).json(true);
-    } else {
-      res.status(404).json(false);
+  if (id) {
+    const deleted = await usersService.remove(id);
+    try {
+      await tasksService.unassignUser(id);
+      res.status(204).json({deleted});
+    } catch (error) {
+      next(error);
     }
-  } catch (error) {
-    next(error);
   }
 });
 

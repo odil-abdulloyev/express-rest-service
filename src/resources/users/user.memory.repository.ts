@@ -1,28 +1,35 @@
-import User from './user.model';
+import User from '../../entity/user';
+import IUser from '../../types/iuser';
 
-const users: User[] = [];
+const getAll = async (): Promise<User[]> => User.find();
 
-const getAll = async (): Promise<User[]> => users;
-
-const create = async (user: User): Promise<void> => {
-  users.push(user);
+const create = async ({name, login, password}: IUser): Promise<User> => {
+  const user = new User();
+  user.name = name;
+  user.login = login;
+  user.password = password;
+  await user.save();
+  return user;
 };
 
-const getById = async (id: string): Promise<User | undefined> => users.find((user) => user.id === id);
+const getById = async (id: string): Promise<User | undefined> => User.findOne(id);
 
-const update = async (newUser: User): Promise<boolean> => {
-  const idx = users.findIndex((user) => user.id === newUser.id);
-  if (idx >= 0) {
-    users.splice(idx, 1, newUser);
+const update = async (newUser: IUser): Promise<boolean> => {
+  const user = await User.findOne(newUser.id);
+  if (user) {
+    user.name = newUser.name;
+    user.login = newUser.login;
+    user.password = newUser.password;
+    await user.save();
     return true;
   }
   return false;
 };
 
 const remove = async (id: string): Promise<boolean> => {
-  const idx = users.findIndex((user) => user.id === id);
-  if (idx >= 0) {
-    users.splice(idx, 1);
+  const user = await User.findOne(id);
+  if (user) {
+    await user.remove();
     return true;
   }
   return false;
