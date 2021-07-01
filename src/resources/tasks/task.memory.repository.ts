@@ -1,13 +1,10 @@
-import Task from './task.model';
-import TaskEntity from '../../entity/task';
+import Task from '../../entity/task';
 import ITask from '../../types/itask';
 
-const tasks: Task[] = [];
+const getAll = async (boardId: string): Promise<Task[]> => Task.find({boardId});
 
-const getAll = async (boardId: string): Promise<TaskEntity[]> => TaskEntity.find({boardId});
-
-const create = async ({title, order, description, userId, boardId, columnId}: ITask): Promise<TaskEntity> => {
-  const task = new TaskEntity();
+const create = async ({title, order, description, userId, boardId, columnId}: ITask): Promise<Task> => {
+  const task = new Task();
   task.title = title;
   task.order = order;
   task.description = description;
@@ -18,10 +15,10 @@ const create = async ({title, order, description, userId, boardId, columnId}: IT
   return task;
 };
 
-const getById = async (id: string): Promise<TaskEntity | undefined> => TaskEntity.findOne(id);
+const getById = async (id: string): Promise<Task | undefined> => Task.findOne(id);
 
 const update = async (newTask: ITask): Promise<boolean> => {
-  const task = await TaskEntity.findOne(newTask.id);
+  const task = await Task.findOne(newTask.id);
   if (task) {
     task.title = newTask.title;
     task.order = newTask.order;
@@ -36,7 +33,7 @@ const update = async (newTask: ITask): Promise<boolean> => {
 };
 
 const remove = async (id: string): Promise<boolean> => {
-  const task = await TaskEntity.findOne(id);
+  const task = await Task.findOne(id);
   if (task) {
     await task.remove();
     return true;
@@ -44,26 +41,26 @@ const remove = async (id: string): Promise<boolean> => {
   return false;
 };
 
-const removeBoardTasks = async (boardId: string): Promise<void> => {
-  if (tasks.length > 0) {
-    let i = tasks.length - 1;
-    while (i >= 0) {
-      if (tasks[i]?.boardId === boardId) {
-        tasks.splice(i, 1);
-      }
-      i -= 1;
-    }
-  }
-};
-
-const unassignUser = async (userId: string): Promise<void> => {
-  tasks.forEach((task) => {
-    const currentTask = task;
-    if (task.userId === userId) {
-      currentTask.userId = null;
-    }
-  });
-};
+// const removeBoardTasks = async (boardId: string): Promise<void> => {
+//   if (tasks.length > 0) {
+//     let i = tasks.length - 1;
+//     while (i >= 0) {
+//       if (tasks[i]?.boardId === boardId) {
+//         tasks.splice(i, 1);
+//       }
+//       i -= 1;
+//     }
+//   }
+// };
+//
+// const unassignUser = async (userId: string): Promise<void> => {
+//   tasks.forEach((task) => {
+//     const currentTask = task;
+//     if (task.userId === userId) {
+//       currentTask.userId = null;
+//     }
+//   });
+// };
 
 export {
   getAll,
@@ -71,6 +68,6 @@ export {
   getById,
   update,
   remove,
-  removeBoardTasks,
-  unassignUser
+  // removeBoardTasks,
+  // unassignUser
 };

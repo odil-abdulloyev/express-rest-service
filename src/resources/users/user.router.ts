@@ -1,6 +1,5 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import * as usersService from './user.service';
-import * as tasksService from '../tasks/task.service';
 import User from '../../entity/user';
 
 const router = Router();
@@ -58,7 +57,7 @@ router.route('/:id').delete(async (req: Request, res: Response, next: NextFuncti
   if (id) {
     const deleted = await usersService.remove(id);
     try {
-      await tasksService.unassignUser(id);
+      // await tasksService.unassignUser(id);
       res.status(204).json({deleted});
     } catch (error) {
       next(error);

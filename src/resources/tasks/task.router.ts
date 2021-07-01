@@ -1,5 +1,4 @@
 import { Router, Request, Response, NextFunction } from 'express';
-// import Task from './task.model';
 import * as tasksService from './task.service';
 import ITask from '../../types/itask';
 
