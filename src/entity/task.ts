@@ -1,5 +1,7 @@
-import { Entity, BaseEntity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, BaseEntity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import ITask from '../types/itask';
+import User from './user';
+import Board from './board';
 
 @Entity('tasks')
 class Task extends BaseEntity implements ITask {
@@ -15,32 +17,20 @@ class Task extends BaseEntity implements ITask {
   @Column()
   description!: string;
 
-  @Column('varchar',{nullable: true})
+  @Column({nullable: true})
   userId!: string | null;
 
-  @Column()
+  @Column({nullable: true})
   boardId!: string;
 
-  @Column()
+  @Column({nullable: true})
   columnId!: string;
 
-  // constructor({
-  //               id = v4(),
-  //               title = 'Task',
-  //               order = 0,
-  //               description = 'Task description',
-  //               userId = '',
-  //               boardId = '',
-  //               columnId = ''
-  //             } = {}) {
-  //   this.id = id;
-  //   this.title = title;
-  //   this.order = order;
-  //   this.description = description;
-  //   this.userId = userId;
-  //   this.boardId = boardId;
-  //   this.columnId = columnId;
-  // }
+  @ManyToOne(() => User, {onDelete: 'SET NULL'})
+  user!: User
+
+  @ManyToOne(() => Board, {onDelete: 'CASCADE'})
+  board!: Board
 }
 
 export default Task;

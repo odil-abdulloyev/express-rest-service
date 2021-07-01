@@ -17,57 +17,14 @@ const create = async ({title, order, description, userId, boardId, columnId}: IT
 
 const getById = async (id: string): Promise<Task | undefined> => Task.findOne(id);
 
-const update = async (newTask: ITask): Promise<boolean> => {
-  const task = await Task.findOne(newTask.id);
-  if (task) {
-    task.title = newTask.title;
-    task.order = newTask.order;
-    task.description = newTask.description;
-    task.boardId = newTask.boardId;
-    task.userId = newTask.userId;
-    task.columnId = newTask.columnId;
-    await task.save();
-    return true;
-  }
-  return false;
-};
+const update = async (newTask: ITask): Promise<boolean> => !!await Task.update(newTask.id, newTask);
 
-const remove = async (id: string): Promise<boolean> => {
-  const task = await Task.findOne(id);
-  if (task) {
-    await task.remove();
-    return true;
-  }
-  return false;
-};
-
-// const removeBoardTasks = async (boardId: string): Promise<void> => {
-//   if (tasks.length > 0) {
-//     let i = tasks.length - 1;
-//     while (i >= 0) {
-//       if (tasks[i]?.boardId === boardId) {
-//         tasks.splice(i, 1);
-//       }
-//       i -= 1;
-//     }
-//   }
-// };
-//
-// const unassignUser = async (userId: string): Promise<void> => {
-//   tasks.forEach((task) => {
-//     const currentTask = task;
-//     if (task.userId === userId) {
-//       currentTask.userId = null;
-//     }
-//   });
-// };
+const remove = async (id: string): Promise<boolean> => !!await Task.delete(id);
 
 export {
   getAll,
   create,
   getById,
   update,
-  remove,
-  // removeBoardTasks,
-  // unassignUser
+  remove
 };

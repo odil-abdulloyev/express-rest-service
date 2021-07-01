@@ -66,7 +66,7 @@ router.route('/:id').put(async (req: Request, res: Response, next: NextFunction)
         boardId,
         columnId
       });
-      res.status(200).json({updated});
+      res.status(updated ? 200 : 404).json({updated});
     } catch (error) {
       next(error);
     }
@@ -78,7 +78,7 @@ router.route('/:id').delete(async (req: Request, res: Response, next: NextFuncti
   if (id) {
     try {
       const deleted = await tasksService.remove(id);
-      res.status(204).json({deleted});
+      res.status(deleted ? 204 : 404).json({deleted});
     } catch (error) {
       next(error);
     }

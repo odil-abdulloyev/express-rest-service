@@ -21,7 +21,5 @@ export {
   create,
   getById,
   update,
-  remove,
-  // removeBoardTasks,
-  // unassignUser,
+  remove
 };
