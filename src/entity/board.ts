@@ -10,7 +10,7 @@ class Board extends BaseEntity implements IBoard {
   @Column()
   title!: string;
 
-  @Column('json')
+  @Column('json', {nullable: true})
   columns!: BoardColumn[];
 }
 
