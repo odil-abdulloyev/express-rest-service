@@ -12,7 +12,7 @@ const logToFile = (filename: string, data: string, sync: boolean): void => {
     const ws = createWriteStream(filepath, { 'flags': 'a' });
     ws.write(data, (error) => {
       if (error) {
-        console.log(error.message);
+        process.stderr.write(error.message);
       }
     });
   }
