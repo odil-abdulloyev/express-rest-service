@@ -1,15 +1,16 @@
 import dotenv from 'dotenv';
+import { ConnectionOptions } from 'typeorm';
 
 dotenv.config();
 
-export default {
+const ormconfig: ConnectionOptions = {
   type: 'postgres',
   host: process.env['PGHOST'],
-  port: process.env['PGPORT'],
+  port: Number(process.env['PGPORT']),
   username: process.env['PGUSER'],
   password: process.env['PGPASSWORD'],
   database: process.env['PGDATABASE'],
-  synchronize: true,
+  synchronize: false,
   logging: false,
   entities: ['src/entity/**/*.ts'],
   migrations: ['src/migration/**/*.ts'],
@@ -21,3 +22,5 @@ export default {
     subscribersDir: 'src/subscriber',
   },
 };
+
+export = ormconfig;

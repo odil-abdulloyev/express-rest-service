@@ -28,6 +28,7 @@
         "plugin:@typescript-eslint/recommended",
         "prettier"
     ],
+    "ignorePatterns": ["src/migration/"],
     "rules": {
         "import/extensions": "off",
         "linebreak-style": "off",

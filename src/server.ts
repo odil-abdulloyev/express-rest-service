@@ -1,12 +1,12 @@
 import 'reflect-metadata';
-import { ConnectionOptions, createConnection } from 'typeorm';
+import { createConnection } from 'typeorm';
 import config from './common/config';
 import app from './app';
 import ormconfig from './ormconfig';
 
 const { PORT } = config;
 
-createConnection(ormconfig as ConnectionOptions).then(() => {
+createConnection(ormconfig).then(() => {
   app.listen(PORT, () =>
     process.stdout.write(`App is running on http://localhost:${PORT}\n`)
   );
