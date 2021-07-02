@@ -25,3 +25,9 @@ NodeJs v14 or newer
 * Remove image: `docker rmi <image_id>`
 * Remove unused images, container and networks: `docker system prune`
 * Stop and remove containers: `docker-compose down`
+
+## Migration instructions
+
+* Generate migration: `npm run migration:generate`
+* Run migration: `npm run migration:run`
+* Revert migration: `npm run migration:revert`
