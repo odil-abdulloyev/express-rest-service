@@ -6,7 +6,8 @@ import ormconfig from './ormconfig';
 
 const { PORT } = config;
 
-createConnection(ormconfig).then(() => {
+createConnection(ormconfig).then(async (connection) => {
+  await connection.runMigrations();
   app.listen(PORT, () =>
     process.stdout.write(`App is running on http://localhost:${PORT}\n`)
   );
