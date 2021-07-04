@@ -1,3 +1,4 @@
+import bcrypt from 'bcrypt';
 import User from '../../entity/user';
 import IUser from '../../types/iuser';
 
@@ -7,7 +8,7 @@ const create = async ({name, login, password}: IUser): Promise<User> => {
   const user = new User();
   user.name = name;
   user.login = login;
-  user.password = password;
+  user.password = await bcrypt.hash(password, 10);
   await user.save();
   return user;
 };
