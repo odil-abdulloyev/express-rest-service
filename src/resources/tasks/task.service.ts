@@ -1,4 +1,4 @@
-import * as tasksRepo from './task.memory.repository';
+import * as tasksRepo from './task.repository';
 import Task from '../../entity/task';
 import ITask from '../../types/itask';
 

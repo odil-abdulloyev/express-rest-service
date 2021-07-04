@@ -1,4 +1,4 @@
-import * as boardsRepo from './board.memory.repository';
+import * as boardsRepo from './board.repository';
 import IBoard from '../../types/iboard';
 import Board from '../../entity/board';
 

@@ -1,4 +1,4 @@
-import * as usersRepo from './user.memory.repository';
+import * as usersRepo from './user.repository';
 import User from '../../entity/user';
 import IUser from '../../types/iuser';
 
