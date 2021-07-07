@@ -10,6 +10,7 @@ export class Migration1625218960375 implements MigrationInterface {
         await queryRunner.query(`CREATE TABLE "tasks" ("id" uuid NOT NULL DEFAULT gen_random_uuid(), "title" character varying NOT NULL, "order" integer NOT NULL, "description" character varying NOT NULL, "userId" uuid, "boardId" uuid, "columnId" character varying, CONSTRAINT "PK_8d12ff38fcc62aaba2cab748772" PRIMARY KEY ("id"))`);
         await queryRunner.query(`ALTER TABLE "tasks" ADD CONSTRAINT "FK_166bd96559cb38595d392f75a35" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE SET NULL ON UPDATE NO ACTION`);
         await queryRunner.query(`ALTER TABLE "tasks" ADD CONSTRAINT "FK_8a75fdea98c72c539a0879cb0d1" FOREIGN KEY ("boardId") REFERENCES "boards"("id") ON DELETE CASCADE ON UPDATE NO ACTION`);
+        await queryRunner.query(`INSERT INTO "users" (name, login, password) VALUES ('Admin', 'admin', '$2b$10$tkqNsldk13QEdg6bA.1v..YRCPiVC84NgsxYLGjQg4Ran4kOD/TG.')`)
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {

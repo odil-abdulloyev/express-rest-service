@@ -1,11 +1,25 @@
-import { Controller, Get, Post, Body, Param, Delete, Put, HttpException, HttpStatus, HttpCode } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Delete,
+  Put,
+  HttpException,
+  HttpStatus,
+  HttpCode,
+  UseGuards
+} from '@nestjs/common';
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { BoardsService } from './boards.service';
 import { CreateBoardDto } from './dto/create-board.dto';
 import { UpdateBoardDto } from './dto/update-board.dto';
 import { Board } from './board.entity';
+import { AuthGuard } from '../auth/auth.guard';
 
 @Controller('boards')
+@UseGuards(AuthGuard)
 export class BoardsController {
   constructor(private readonly boardsService: BoardsService) {}
 
