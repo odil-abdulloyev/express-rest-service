@@ -7,7 +7,7 @@ import boardRouter from './resources/boards/board.router';
 import taskRouter from './resources/tasks/task.router';
 import loginRouter from './resources/login/login.router';
 import errorLogger from './middleware/error-logger';
-import requestLogger from './middleware/request-logger';
+// import requestLogger from './middleware/request-logger';
 import { uncaughtErrorHandler } from './error-handlers/uncaught-error-handler';
 import validateAuth from './middleware/validate-auth';
 
@@ -16,7 +16,7 @@ const swaggerDocument = YAML.load(path.join(__dirname, '../doc/api.yaml'));
 
 app.use(express.json() as RequestHandler);
 app.use(express.urlencoded({extended: true}) as RequestHandler);
-app.use(requestLogger);
+// app.use(requestLogger);
 
 app.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
