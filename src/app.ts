@@ -8,7 +8,7 @@ import taskRouter from './resources/tasks/task.router';
 import loginRouter from './resources/login/login.router';
 import errorLogger from './middleware/error-logger';
 import requestLogger from './middleware/request-logger';
-import uncaughtErrorHandler from './error-handlers/uncaught-error-handler';
+import { uncaughtErrorHandler } from './error-handlers/uncaught-error-handler';
 import validateAuth from './middleware/validate-auth';
 
 const app = express();

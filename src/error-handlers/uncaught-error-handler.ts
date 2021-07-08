@@ -1,8 +1,6 @@
-import createErrorData from '../utils/create-error-data';
-import logToFile from '../utils/log-to-file';
+import { log } from '../logger/log';
 
-const uncaughtErrorHandler = (err: Error): void => {
-  logToFile('errors.log', createErrorData(err), true);
+export const uncaughtErrorHandler = (err: Error): void => {
+  log('error.log', JSON.stringify(err.stack), { sync: true });
+  process.exit(1);
 };
-
-export default uncaughtErrorHandler;
