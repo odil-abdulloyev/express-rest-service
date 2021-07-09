@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
 
-interface IRunningInfo {
+export interface RunningInfo {
   message: string
 }
 
 @Injectable()
 export class AppService {
-  runningInfo: IRunningInfo = { message: 'Service is running' };
+  runningInfo: RunningInfo = { message: 'Service is running' };
 
-  sendInfo(): IRunningInfo {
+  sendInfo(): RunningInfo {
     return this.runningInfo;
   }
 }
