@@ -1,9 +1,9 @@
 import { Module, NestModule, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import ormconfig from '../ormconfig';
-import { BoardsModule } from '../boards/boards.module';
-import { TasksModule } from '../tasks/tasks.module';
-import { UsersModule } from '../users/users.module';
+import { BoardsModule } from '../resources/boards/boards.module';
+import { TasksModule } from '../resources/tasks/tasks.module';
+import { UsersModule } from '../resources/users/users.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from '../auth/auth.module';

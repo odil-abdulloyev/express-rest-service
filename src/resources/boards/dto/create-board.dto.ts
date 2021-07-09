@@ -1,4 +1,4 @@
-import BoardColumn from '../../entity/board-column';
+import { BoardColumn } from '../board-column.entity';
 
 export class CreateBoardDto {
   title!: string;
