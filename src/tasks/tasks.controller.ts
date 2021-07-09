@@ -8,8 +8,7 @@ import {
   Put,
   HttpException,
   HttpStatus,
-  HttpCode,
-  UseGuards
+  UseGuards,
 } from '@nestjs/common';
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { TasksService } from './tasks.service';
@@ -24,7 +23,10 @@ export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
 
   @Post()
-  async create(@Body() createTaskDto: CreateTaskDto, @Param('boardId') boardId: string): Promise<Task> {
+  async create(
+    @Body() createTaskDto: CreateTaskDto,
+    @Param('boardId') boardId: string
+  ): Promise<Task> {
     try {
       return await this.tasksService.create({ ...createTaskDto, boardId });
     } catch (err) {
@@ -39,7 +41,7 @@ export class TasksController {
 
   @Get(':id')
   async findOne(@Param('id') id: string): Promise<Task> {
-    const task  = await this.tasksService.findOne(id);
+    const task = await this.tasksService.findOne(id);
     if (!task) {
       throw new HttpException('Task not found', HttpStatus.NOT_FOUND);
     }
@@ -47,7 +49,10 @@ export class TasksController {
   }
 
   @Put(':id')
-  async update(@Param('id') id: string, @Body() updateTaskDto: UpdateTaskDto): Promise<UpdateResult> {
+  async update(
+    @Param('id') id: string,
+    @Body() updateTaskDto: UpdateTaskDto
+  ): Promise<UpdateResult> {
     const task = await this.tasksService.findOne(id);
     if (!task) {
       throw new HttpException('Bad request', HttpStatus.BAD_REQUEST);
@@ -56,7 +61,6 @@ export class TasksController {
   }
 
   @Delete(':id')
-  @HttpCode(HttpStatus.NO_CONTENT)
   async remove(@Param('id') id: string): Promise<DeleteResult> {
     const task = await this.tasksService.findOne(id);
     if (!task) {

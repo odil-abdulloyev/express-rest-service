@@ -8,8 +8,7 @@ import {
   Put,
   HttpException,
   HttpStatus,
-  HttpCode,
-  UseGuards
+  UseGuards,
 } from '@nestjs/common';
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { BoardsService } from './boards.service';
@@ -43,7 +42,10 @@ export class BoardsController {
   }
 
   @Put(':id')
-  async update(@Param('id') id: string, @Body() updateBoardDto: UpdateBoardDto): Promise<UpdateResult> {
+  async update(
+    @Param('id') id: string,
+    @Body() updateBoardDto: UpdateBoardDto
+  ): Promise<UpdateResult> {
     const board = await this.boardsService.findOne(id);
     if (!board) {
       throw new HttpException('Bad request', HttpStatus.BAD_REQUEST);
@@ -52,7 +54,6 @@ export class BoardsController {
   }
 
   @Delete(':id')
-  @HttpCode(HttpStatus.NO_CONTENT)
   async remove(@Param('id') id: string): Promise<DeleteResult> {
     const board = await this.boardsService.findOne(id);
     if (!board) {
