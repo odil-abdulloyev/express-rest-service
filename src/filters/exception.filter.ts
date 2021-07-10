@@ -3,7 +3,7 @@ import {
   ExceptionFilter as NestJSExceptionFilter,
   ArgumentsHost,
   HttpException,
-  HttpStatus,
+  HttpStatus
 } from '@nestjs/common';
 import { log } from '../logger/log';
 
@@ -23,7 +23,7 @@ export class ExceptionFilter implements NestJSExceptionFilter {
       url,
       method,
       statusCode,
-      error: exception.message,
+      error: exception.message
     });
   }
 }

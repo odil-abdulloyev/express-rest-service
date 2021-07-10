@@ -10,4 +10,5 @@ import { AuthModule } from '../../auth/auth.module';
   controllers: [BoardsController],
   providers: [BoardsService]
 })
-export class BoardsModule {}
+export class BoardsModule {
+}

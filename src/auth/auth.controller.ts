@@ -5,7 +5,8 @@ import { TokenDto } from './dto/token.dto';
 
 @Controller('login')
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) {
+  }
 
   @Post()
   async signIn(@Body() authDto: AuthDto): Promise<TokenDto> {

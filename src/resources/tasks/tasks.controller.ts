@@ -8,7 +8,7 @@ import {
   Put,
   HttpException,
   HttpStatus,
-  UseGuards,
+  UseGuards
 } from '@nestjs/common';
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { TasksService } from './tasks.service';
@@ -20,7 +20,8 @@ import { AuthGuard } from '../../auth/auth.guard';
 @Controller('boards/:boardId/tasks')
 @UseGuards(AuthGuard)
 export class TasksController {
-  constructor(private readonly tasksService: TasksService) {}
+  constructor(private readonly tasksService: TasksService) {
+  }
 
   @Post()
   async create(

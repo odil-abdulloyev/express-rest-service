@@ -8,10 +8,10 @@ export class User {
   @Column()
   name!: string;
 
-  @Column({nullable: true})
+  @Column({ nullable: true })
   login!: string;
 
-  @Column({nullable: true})
+  @Column({ nullable: true })
   password!: string;
 
   static toResponse(user: User): { id: string, name: string, login: string } {

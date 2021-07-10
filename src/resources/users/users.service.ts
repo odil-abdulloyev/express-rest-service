@@ -8,11 +8,15 @@ import { User } from './user.entity';
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectRepository(User) private usersRepository: Repository<User>) {}
-  
+  constructor(@InjectRepository(User) private usersRepository: Repository<User>) {
+  }
+
   async create(createUserDto: CreateUserDto): Promise<Partial<User>> {
     const { password } = createUserDto;
-    return User.toResponse(await this.usersRepository.save({ ...createUserDto, password: await bcrypt.hash(password, 10) }));
+    return User.toResponse(await this.usersRepository.save({
+      ...createUserDto,
+      password: await bcrypt.hash(password, 10)
+    }));
   }
 
   async findAll(): Promise<Partial<User>[]> {

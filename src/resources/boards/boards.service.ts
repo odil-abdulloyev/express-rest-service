@@ -7,9 +7,10 @@ import { Board } from './board.entity';
 
 @Injectable()
 export class BoardsService {
-  constructor(@InjectRepository(Board) private boardsRepository: Repository<Board>) {}
+  constructor(@InjectRepository(Board) private boardsRepository: Repository<Board>) {
+  }
 
- async create(createBoardDto: CreateBoardDto): Promise<Board> {
+  async create(createBoardDto: CreateBoardDto): Promise<Board> {
     return this.boardsRepository.save(createBoardDto);
   }
 

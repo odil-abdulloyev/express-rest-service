@@ -9,7 +9,8 @@ import { AuthGuard } from '../../auth/auth.guard';
 @Controller('users')
 @UseGuards(AuthGuard)
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private readonly usersService: UsersService) {
+  }
 
   @Post()
   async create(@Body() createUserDto: CreateUserDto): Promise<Partial<User>> {

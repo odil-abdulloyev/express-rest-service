@@ -9,6 +9,6 @@ export class Board {
   @Column()
   title!: string;
 
-  @Column('json', {nullable: true})
+  @Column('json', { nullable: true })
   columns!: BoardColumn[];
 }

@@ -5,7 +5,10 @@ interface LoggingOptions {
   console?: boolean
 }
 
-export const log = (filename: string, data: string, options: LoggingOptions = { sync: false, console: false }): void => {
+export const log = (filename: string, data: string, options: LoggingOptions = {
+  sync: false,
+  console: false
+}): void => {
   const dirname = 'logs';
   if (!existsSync(dirname)) {
     mkdirSync(dirname);
@@ -28,4 +31,4 @@ export const log = (filename: string, data: string, options: LoggingOptions = { 
       }
     });
   }
-}
+};

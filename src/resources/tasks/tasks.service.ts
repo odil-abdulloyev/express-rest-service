@@ -7,7 +7,8 @@ import { Task } from './task.entity';
 
 @Injectable()
 export class TasksService {
-  constructor(@InjectRepository(Task) private tasksRepository: Repository<Task>) {}
+  constructor(@InjectRepository(Task) private tasksRepository: Repository<Task>) {
+  }
 
   async create(createTaskDto: CreateTaskDto): Promise<Task> {
     return this.tasksRepository.save(createTaskDto);

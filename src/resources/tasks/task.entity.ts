@@ -16,18 +16,18 @@ export class Task {
   @Column()
   description!: string;
 
-  @Column({nullable: true})
+  @Column({ nullable: true })
   userId!: string | null;
 
-  @Column({nullable: true})
+  @Column({ nullable: true })
   boardId!: string;
 
-  @Column({nullable: true})
+  @Column({ nullable: true })
   columnId!: string;
 
-  @ManyToOne(() => User, {onDelete: 'SET NULL'})
-  user!: User
+  @ManyToOne(() => User, { onDelete: 'SET NULL' })
+  user!: User;
 
-  @ManyToOne(() => Board, {onDelete: 'CASCADE'})
-  board!: Board
+  @ManyToOne(() => Board, { onDelete: 'CASCADE' })
+  board!: Board;
 }

@@ -7,7 +7,8 @@ import { TokenDto } from './dto/token.dto';
 
 @Injectable()
 export class AuthService {
-  constructor(private userService: UsersService, private jwtService: JwtService) {}
+  constructor(private userService: UsersService, private jwtService: JwtService) {
+  }
 
   async signIn(authDto: AuthDto): Promise<TokenDto> {
     const { login, password } = authDto;
