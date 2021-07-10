@@ -3,7 +3,7 @@ import { ConnectionOptions } from 'typeorm';
 
 dotenv.config();
 
-export const ormconfig: ConnectionOptions = {
+const ormconfig: ConnectionOptions = {
   type: 'postgres',
   host: process.env['PGHOST'],
   port: Number(process.env['PGPORT']),
@@ -22,3 +22,5 @@ export const ormconfig: ConnectionOptions = {
     subscribersDir: 'src/subscriber'
   }
 };
+
+export default ormconfig;

@@ -1,6 +1,6 @@
 import { Module, NestModule, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ormconfig } from '../ormconfig';
+import ormconfig from '../ormconfig';
 import { BoardsModule } from '../resources/boards/boards.module';
 import { TasksModule } from '../resources/tasks/tasks.module';
 import { UsersModule } from '../resources/users/users.module';
