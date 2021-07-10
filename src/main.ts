@@ -25,7 +25,7 @@ async function bootstrap() {
   SwaggerModule.setup('doc', app, swaggerDocument);
   app.useGlobalFilters(new ExceptionFilter());
   await app
-    .listen(Number(PORT) || 4000)
+    .listen(Number(PORT) || 4000, '0.0.0.0')
     .then(() =>
       process.stdout.write(`App is running on http://localhost:${PORT}\n`)
     );
