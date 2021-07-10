@@ -15,7 +15,7 @@ import { BoardsService } from './boards.service';
 import { CreateBoardDto } from './dto/create-board.dto';
 import { UpdateBoardDto } from './dto/update-board.dto';
 import { Board } from './board.entity';
-import { AuthGuard } from '../../auth/auth.guard';
+import { AuthGuard } from '../auth/auth.guard';
 
 @Controller('boards')
 @UseGuards(AuthGuard)

@@ -8,7 +8,7 @@ import {
   NestFastifyApplication
 } from '@nestjs/platform-fastify';
 import config from './common/config';
-import { AppModule } from './app/app.module';
+import { AppModule } from './resources/app/app.module';
 import { ExceptionFilter } from './filters/exception.filter';
 import { uncaughtErrorHandler } from './error-handlers/uncaught-error-handler';
 
