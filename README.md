@@ -1,20 +1,22 @@
-# Express REST Service
+# NestJS REST Service
 
-## Instructions
+## Common instructions
 
 1. Clone this repo to your computer: `git clone git@github.com:odil-abdulloyev/express-rest-service.git`;
 2. Go to project folder: `cd express-rest-service`;
-3. Switch to development branch: `git checkout develop`;
+3. Switch to development branch: `git checkout nestjs`;
 4. Install dependencies: `npm i`;
 5. Run program: `npm start`;
-6. Run tests in new tab of terminal: `npm test`;
+6. Run tests in new tab of terminal: `npm run test:auth`;
 7. Run linter: `npm run lint`;
-8. Run ts-compiler: `npm run build`.
+8. Build project: `npm run build`.
 
 ## System requirements
 NodeJs v14 or newer
 
 ## Docker instructions
+
+**To run application in docker container go to `.env` file and set value of `PGHOST` variable to `postgres`.**
 
 * Run containers: `docker-compose up`
 * Show images: `docker images`
@@ -31,3 +33,11 @@ NodeJs v14 or newer
 * Generate migration: `npm run migration:generate`
 * Run migration: `npm run migration:run`
 * Revert migration: `npm run migration:revert`
+
+## Using `fastify`
+
+To run application in `fastify` platform set the value of environment variable `USE_FASTIFY` to `true`, then restart the server.
+
+## Performance testing using `artillery`
+
+Open terminal and type `npm run artillery`. This command will test the application performance and generate report files in `json` and `html` formats.
