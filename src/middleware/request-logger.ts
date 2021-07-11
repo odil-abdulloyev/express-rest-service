@@ -1,19 +1,21 @@
 import { NextFunction, Request, Response } from 'express';
-import logToFile from '../utils/log-to-file';
+import { Injectable, NestMiddleware } from '@nestjs/common';
+import { log } from '../logger/log';
 
-const requestLogger = (req: Request, res: Response, next: NextFunction): void => {
-  const { url, query, body, method } = req;
-  res.on('finish', () => {
-    const logData = {
-      'URL': url,
-      'Method': method,
-      'Query parameters': query,
-      'Request body': body,
-      'Status code': res.statusCode
-    };
-    logToFile('info.log', `${JSON.stringify(logData)}\n`, false);
-  });
-  next();
-};
-
-export default requestLogger;
+@Injectable()
+export class RequestLogger implements NestMiddleware {
+  use(req: Request, res: Response, next: NextFunction): void {
+    const { originalUrl, query, body, method } = req;
+    res.on('finish', () => {
+      const logData = {
+        'URL': originalUrl,
+        'Method': method,
+        'Query parameters': query,
+        'Request body': body,
+        'Status code': res.statusCode
+      };
+      log('info.log', `${JSON.stringify(logData)}\n`);
+    });
+    next();
+  }
+}

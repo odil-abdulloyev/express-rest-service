@@ -1,10 +1,10 @@
 version: '3'
 services:
-  express:
-    image: odil/express-rest-service_express
+  app:
+    image: odil/express-rest-service_app
     build:
       context: .
-      dockerfile: express.Dockerfile
+      dockerfile: app.Dockerfile
     ports:
       - ${PORT}:${PORT}
     depends_on:

@@ -1,7 +1,7 @@
 import {MigrationInterface, QueryRunner} from "typeorm";
 
 export class Migration1625218960375 implements MigrationInterface {
-    name = 'Migration1625218960375'
+    name = 'Migration1625218960375';
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`CREATE TABLE "columns" ("id" uuid NOT NULL DEFAULT gen_random_uuid(), "title" character varying NOT NULL, "order" integer NOT NULL, CONSTRAINT "PK_4ac339ccbbfed1dcd96812abbd5" PRIMARY KEY ("id"))`);
@@ -20,5 +20,4 @@ export class Migration1625218960375 implements MigrationInterface {
         await queryRunner.query(`DROP TABLE "boards"`);
         await queryRunner.query(`DROP TABLE "columns"`);
     }
-
 }

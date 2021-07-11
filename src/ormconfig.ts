@@ -10,17 +10,17 @@ const ormconfig: ConnectionOptions = {
   username: process.env['PGUSER'],
   password: process.env['PGPASSWORD'],
   database: process.env['PGDATABASE'],
+  migrationsRun: true,
   synchronize: false,
   logging: false,
-  entities: ['src/entity/**/*.ts'],
-  migrations: ['src/migration/**/*.ts'],
-  subscribers: ['src/subscriber/**/*.ts'],
+  entities: ['build/**/*.entity{.ts,.js}'],
+  migrations: ['build/migration/**/*.js'],
   uuidExtension: 'pgcrypto',
   cli: {
     entitiesDir: 'src/entity',
     migrationsDir: 'src/migration',
-    subscribersDir: 'src/subscriber',
-  },
+    subscribersDir: 'src/subscriber'
+  }
 };
 
-export = ormconfig;
+export default ormconfig;
