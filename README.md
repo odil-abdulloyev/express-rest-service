@@ -41,3 +41,9 @@ To run application in `fastify` platform set the value of environment variable `
 ## Performance testing using `artillery`
 
 Open terminal and type `npm run artillery`. This command will test the application performance and generate report files in `json` and `html` formats.
+
+## Performance testing results
+
+For `express` platform: [https://express-report.netlify.app/](https://express-report.netlify.app/)
+
+For `fastify` platform: [https://fastify-report.netlify.app/](https://fastify-report.netlify.app/)
